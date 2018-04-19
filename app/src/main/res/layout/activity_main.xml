@@ -35,7 +35,7 @@
         android:id="@+id/btn_pick_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/btn_bg"
         android:text="Pick Image"
         android:padding="12dp"
         android:gravity="center"

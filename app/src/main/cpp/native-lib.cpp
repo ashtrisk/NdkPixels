@@ -77,7 +77,7 @@ Java_com_ashutosh_ndkpixels_MainActivity_processImage(JNIEnv *env, jobject insta
 
         int j = 0;
         for (int i = 0; i < 256; i++) {
-            __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, "i = %d, A = %d", i, freqA[i]);
+//            __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, "i = %d, A = %d", i, freqA[i]);
             j += freqA[i];
         }
 

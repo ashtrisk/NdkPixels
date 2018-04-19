@@ -2,6 +2,7 @@ package com.ashutosh.ndkpixels;
 
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,7 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
 
     @Override
     public ContentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if(viewType == VIEW_TYPE_IMAGE){
+        if (viewType == VIEW_TYPE_IMAGE) {
             return new ContentViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_content_img, parent, false));
         } else {
             return new ContentViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_content_graph, parent, false));
@@ -43,17 +44,17 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
     public void onBindViewHolder(ContentViewHolder holder, int position) {
         int viewType = getItemViewType(position);
 
-        if(viewType == VIEW_TYPE_IMAGE){
-            if(holder.imageView != null && imgBitmap != null){
+        if (viewType == VIEW_TYPE_IMAGE) {
+            if (holder.imageView != null && imgBitmap != null) {
                 holder.imageView.setImageBitmap(imgBitmap);
             }
         } else {
-            if(position >= 1){
+            if (position >= 1) {
                 // Graph view
                 ItemContent itemContent = itemContentList.get(position - 1);
-                int [] freq = itemContent.getFreq();
+                int[] freq = itemContent.getFreq();
 
-                DataPoint dataPoints [] = new DataPoint[freq.length - 1];
+                DataPoint dataPoints[] = new DataPoint[freq.length - 1];
 
                 for (int i = 1; i < freq.length; i++) {
                     dataPoints[i - 1] = new DataPoint(i, freq[i]);
@@ -75,7 +76,7 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
     @Override
     public int getItemCount() {
         // +1 for image
-        if(imgBitmap != null) {
+        if (imgBitmap != null) {
             return itemContentList.size() + 1;
         } else {
             return itemContentList.size();
@@ -84,7 +85,7 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
 
     @Override
     public int getItemViewType(int position) {
-        if(position == 0){
+        if (position == 0) {
             return VIEW_TYPE_IMAGE;
         } else {
             return VIEW_TYPE_GRAPH;
@@ -92,6 +93,8 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
     }
 
     public void addImage(Bitmap bitmap) {
+        Log.d("addImage", "Bitmap = " + bitmap);
+
         this.imgBitmap = bitmap;
 
         notifyDataSetChanged();
@@ -108,7 +111,7 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
         notifyDataSetChanged();
     }
 
-    class ContentViewHolder extends RecyclerView.ViewHolder{
+    class ContentViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
         GraphView graphView;
